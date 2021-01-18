@@ -2,7 +2,8 @@
 <%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="test.demo.model.Vacancy" %>
-<%@ page import="test.demo.HelloWorld" %><%--<%@ page import="java.util.Date" %>
+<%@ page import="test.demo.HelloWorld" %>
+<%--<%@ page import="java.util.Date" %>
 <%@ page import="test.demo.HelloWorld" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="test.demo.model.Vacancy" %>
@@ -29,42 +30,6 @@
  */
 --%>
 
-<%--
-<% out.println("<p>Текущая дата " + new Date() + " </p>");%>
-<% ArrayList<Vacancy> list  = HelloWorld.getFromDb("", "");
-    int countVacancy = list.size();
-%>
-<% out.println("<p>Количество загруженных вакансий: " + countVacancy + "</p>");%>
-
-<%  String countOutput = (String) request.getAttribute("countOutput");
-
-int countOnPage;
-try {
-    countOnPage = Integer.parseInt(countOutput);
-}catch (Exception e){
-    HelloWorld.logThisShit(e.getMessage());
-    countOnPage = 10;
-}
-
-
-    try {
-        for (int k = HelloWorld.index; k < HelloWorld.index + countOnPage && k < countVacancy; k++) {
-            out.println("<p>");
-            out.println("Вакансия: " + list.get(k).getName());
-            out.println("Организация: " + list.get(k).getOrganization());
-            if (list.get(k).getSalary().equals("null"))
-                out.println("Зарплата: не указана");
-            else out.println("Зарплата: " + list.get(k).getSalary());
-            out.println("Дата публикации: " + list.get(k).getDateOfPublic());
-            out.println("</p>");
-        }
-    }
-    catch (IOException e)
-    {
-        HelloWorld.logThisShit(e.getMessage());
-    }
- %>
---%>
 <portlet:defineObjects/>
 <%
     String keyword = com.liferay.portal.kernel.util.ParamUtil.getString(request, "keywords");
