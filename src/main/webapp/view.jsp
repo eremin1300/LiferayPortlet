@@ -45,6 +45,14 @@
     </div>
 </aui:form>
 
+<portlet:actionURL name="updateVacancies" var="updateVacanciesURL"></portlet:actionURL>
+<aui:form action="<%= updateVacanciesURL %>" name="<portlet:namespace />fm">
+    <div>
+    <h5>Внимание! Вакансии будут обновляться значительное время!</h5>
+    <aui:button type="submit" value="Update" />
+    </div>
+</aui:form>
+
 <jsp:useBean id="vacancies" class="java.util.ArrayList" scope="request"/>
 <liferay-ui:search-container delta="10"
         emptyResultsMessage="there-are-no-vacancies-for-the-selected-resource">

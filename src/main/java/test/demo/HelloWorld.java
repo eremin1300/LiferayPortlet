@@ -54,6 +54,12 @@ public class HelloWorld<processAction> extends MVCPortlet {
             vacancies = dbService.getFromDb("");
             actionResponse.setPortletMode(PortletMode.VIEW);
     }
+
+    public  void updateVacancies(ActionRequest actionRequest, ActionResponse actionResponse)
+            throws PortletModeException, SQLException, IOException {
+                downloadServise.downloadVacancy();
+        actionResponse.setPortletMode(PortletMode.VIEW);
+    }
 }
 
 

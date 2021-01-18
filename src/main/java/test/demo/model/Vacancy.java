@@ -1,17 +1,18 @@
 package test.demo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Vacancy implements Serializable {
 
     private Long id;
     private String name;
-    private String dateOfPublic;
+    private Date dateOfPublic;
     private String organization;
     private String salary;      //почему String - потому что часто встречается "По договоренности" или "Не определена".
 
 
-    public Vacancy(String id, String name, String dateOfPublic, String organization, String salary) {
+    public Vacancy(String id, String name, Date dateOfPublic, String organization, String salary) {
         this.name = name;
         this.dateOfPublic = dateOfPublic;
         this.organization = organization;
@@ -30,7 +31,7 @@ public class Vacancy implements Serializable {
         return name;
     }
 
-    public String getDateOfPublic() {
+    public Date getDateOfPublic() {
         return dateOfPublic;
     }
 

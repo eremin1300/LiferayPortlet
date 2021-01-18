@@ -4,6 +4,7 @@ import test.demo.model.Vacancy;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DBService {
 
@@ -54,7 +55,7 @@ public class DBService {
                 String vacname = rs.getString("vacname");
                 String vacorganization = rs.getString("vacorganization");
                 String vacsalary = rs.getString("vacsalary");
-                String vacpublicdate = rs.getString("vacpublicdate");
+                Date vacpublicdate = rs.getDate("vacpublicdate");
                 Vacancy vac = new Vacancy(id, vacname, vacpublicdate, vacorganization, vacsalary);
 
                 vacancyList.add(vac);
@@ -81,7 +82,7 @@ public class DBService {
                 + "vacname VARCHAR(100) NOT NULL, "
                 + "vacorganization VARCHAR(100) NOT NULL, "
                 + "vacsalary VARCHAR(20) NOT NULL, "
-                + "vacpublicdate VARCHAR(20) NOT NULL, "
+                + "vacpublicdate timestamp without time zone, "
                 + "PRIMARY KEY (id) "
                 + ")";
 
@@ -120,4 +121,22 @@ public class DBService {
         return dbConnection;
     }
 
+    protected void checkOldVacancy() throws SQLException {
+        ArrayList<Vacancy> vacancyList = new ArrayList<Vacancy>();
+        Connection connection = null;
+        Statement statement = null;
+        String selectTableSQL;
+            selectTableSQL = "DELETE  from vacancy where vacpublicdate < current_date - integer '30'";
+        try {
+            connection = getDBConnection();
+            statement = connection.createStatement();
+            statement.executeQuery(selectTableSQL);
+        } catch (SQLException e) {
+            logger.logThisShit(e.getMessage());
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
 }

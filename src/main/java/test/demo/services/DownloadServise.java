@@ -17,8 +17,12 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class DownloadServise {
     Logger logger = new Logger();
@@ -62,8 +66,8 @@ public class DownloadServise {
         } catch (Exception e) {
             logger.logThisShit(e.getMessage());
         }
-        for (int i = 0; i < 20; i++) {
-
+      //  for (int i = 0; i < 20; i++) {
+            int i = 0;
             String url = "https://api.hh.ru/vacancies?&specialization=1&area=4&page="+i+"&per_page=100";
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
@@ -86,6 +90,15 @@ public class DownloadServise {
                     JSONObject employer = (JSONObject) test.get("employer");
                     JSONObject salary;
                     StringBuilder stringBuilder = new StringBuilder();
+                    Date date = new Date();
+                    String published_at = test.get("published_at").toString().substring(0, 9)
+                            +" "+ test.get("published_at").toString().substring(11, 18);
+                    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+                    try {
+                        date = formater.parse(published_at);
+                    } catch (ParseException e) {
+                        logger.logThisShit(e.getMessage());
+                    }
                     try {
                         salary = (JSONObject) test.get("salary");
                         if (!salary.get("from").toString().equals("null"))
@@ -95,14 +108,15 @@ public class DownloadServise {
                     } catch (ClassCastException e) {
                         stringBuilder.append(" не указана");
                     }
-                    String published_at = test.get("published_at").toString().substring(0, 9);
+
                     list.add(new Vacancy(test.get("id").toString(), test.get("name").toString(),
-                            published_at, employer.get("name").toString(), stringBuilder.toString()));
+                            date, employer.get("name").toString(), stringBuilder.toString()));
          //    Vacancy(String id, String name, String dateOfPublic, String organization, String salary)
                 }
             }
-        }
+       // }
         try {
+            dbService.checkOldVacancy();
             dbService.addToDb(list);
         } catch (SQLException e) {
             logger.logThisShit(e.getMessage());
