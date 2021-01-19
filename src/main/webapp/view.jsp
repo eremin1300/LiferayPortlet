@@ -54,14 +54,13 @@
 </aui:form>
 
 <jsp:useBean id="vacancies" class="java.util.ArrayList" scope="request"/>
-<liferay-ui:search-container delta="10"
+<liferay-ui:search-container
         emptyResultsMessage="there-are-no-vacancies-for-the-selected-resource">
 
     <liferay-ui:search-container-results
             results="<%= vacancies %>"
             total="<%= vacancies.size() %>"
     />
-
     <liferay-ui:search-container-row
             className="test.demo.model.Vacancy"
             modelVar="vacancy" escapedModel="<%=true%>"
@@ -72,6 +71,19 @@
         <liferay-ui:search-container-column-text property="salary" />
 
     </liferay-ui:search-container-row>
-
-    <liferay-ui:search-iterator />
+   <liferay-ui:search-iterator />
 </liferay-ui:search-container>
+
+<portlet:actionURL name="nextPage" var="nextPageURL"></portlet:actionURL>
+<aui:form action="<%= nextPageURL %>" name="<portlet:namespace />fm">
+    <div>
+        <aui:button type="submit" value="next page" />
+    </div>
+</aui:form>
+<portlet:actionURL name="previousPage" var="previousPageURL"></portlet:actionURL>
+<aui:form action="<%= previousPageURL %>" name="<portlet:namespace />fm">
+    <div>
+        <aui:button type="submit" value="previous page" />
+    </div>
+
+</aui:form>
