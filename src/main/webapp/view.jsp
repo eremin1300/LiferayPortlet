@@ -58,9 +58,10 @@
         emptyResultsMessage="there-are-no-vacancies-for-the-selected-resource">
 
     <liferay-ui:search-container-results
-            results="<%= vacancies %>"
-            total="<%= vacancies.size() %>"
+            results="<%= HelloWorld.getResults(searchContainer.getStart(), searchContainer.getEnd()) %>"
+            total="<%= HelloWorld.getVacanciesSize() %>"
     />
+    <% searchContainer.setResults(results);%>
     <liferay-ui:search-container-row
             className="test.demo.model.Vacancy"
             modelVar="vacancy" escapedModel="<%=true%>"
@@ -74,7 +75,7 @@
    <liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
-<portlet:actionURL name="nextPage" var="nextPageURL"></portlet:actionURL>
+<%--<portlet:actionURL name="nextPage" var="nextPageURL"></portlet:actionURL>
 <aui:form action="<%= nextPageURL %>" name="<portlet:namespace />fm">
     <div>
         <aui:button type="submit" value="next page" />
@@ -86,4 +87,4 @@
         <aui:button type="submit" value="previous page" />
     </div>
 
-</aui:form>
+</aui:form>--%>
