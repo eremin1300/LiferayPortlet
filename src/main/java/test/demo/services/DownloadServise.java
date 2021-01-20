@@ -66,7 +66,9 @@ public class DownloadServise {
         } catch (Exception e) {
             logger.logThisShit(e.getMessage());
         }
-      //  for (int i = 0; i < 20; i++) {
+        //для демонстрации достаточно 100 вакансий,
+        //чтобы обеспечить работоспособность для всего списка - раскомментируем цикл и убираем обьявленный i
+        //  for (int i = 0; i < 20; i++) {
             int i = 0;
             String url = "https://api.hh.ru/vacancies?&specialization=1&area=4&page="+i+"&per_page=100";
             URL obj = new URL(url);

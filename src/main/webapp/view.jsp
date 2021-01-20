@@ -74,17 +74,3 @@
     </liferay-ui:search-container-row>
    <liferay-ui:search-iterator />
 </liferay-ui:search-container>
-
-<%--<portlet:actionURL name="nextPage" var="nextPageURL"></portlet:actionURL>
-<aui:form action="<%= nextPageURL %>" name="<portlet:namespace />fm">
-    <div>
-        <aui:button type="submit" value="next page" />
-    </div>
-</aui:form>
-<portlet:actionURL name="previousPage" var="previousPageURL"></portlet:actionURL>
-<aui:form action="<%= previousPageURL %>" name="<portlet:namespace />fm">
-    <div>
-        <aui:button type="submit" value="previous page" />
-    </div>
-
-</aui:form>--%>

@@ -44,13 +44,7 @@ public class HelloWorld<processAction> extends MVCPortlet {
     @Override
     public void render(RenderRequest renderRequest, RenderResponse renderResponse)
             throws PortletException, IOException {
-
         if (vacancies != null) {
-            /*
-            vacanciesView.clear();
-            for (int i = (page - 1) * 10; i < vacancies.size() && i < page * 10; i++) {
-                vacanciesView.add(vacancies.get(i));
-            }*/
             renderRequest.setAttribute("vacancies", vacanciesView);
         }
         super.render(renderRequest, renderResponse);
@@ -73,20 +67,6 @@ public class HelloWorld<processAction> extends MVCPortlet {
     public void updateVacancies(ActionRequest actionRequest, ActionResponse actionResponse)
             throws PortletModeException, SQLException, IOException {
         downloadServise.downloadVacancy();
-        actionResponse.setPortletMode(PortletMode.VIEW);
-    }
-
-    public void nextPage(ActionRequest actionRequest, ActionResponse actionResponse)
-            throws PortletModeException {
-        if (vacancies.size() > page * 10)
-            page++;
-        actionResponse.setPortletMode(PortletMode.VIEW);
-    }
-
-    public void previousPage(ActionRequest actionRequest, ActionResponse actionResponse)
-            throws PortletModeException {
-        if (page > 1)
-            page--;
         actionResponse.setPortletMode(PortletMode.VIEW);
     }
 
